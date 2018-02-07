@@ -19,6 +19,7 @@
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild( app.createNewCar() );
         app.clearForm();
+        app.deleteCar()
       },
 
       clearForm: function clearForm () {
@@ -37,10 +38,14 @@
         var $tdColor = document.createElement('td');
         var $image = document.createElement('img');
 
+        var $tdbtn = document.createElement('td');
+        $tdbtn.innerHTML = '<button type="submit" data-js="btn-delete">delete</button>';
+
         $tdModel.textContent = $('[data-js="model"]').get().value;
         $tdYear.textContent = $('[data-js="year"]').get().value;
         $tdPlate.textContent = $('[data-js="plate"]').get().value;
         $tdColor.textContent = $('[data-js="color"]').get().value;
+       
 
         $image.setAttribute('src', $('[data-js="image"]').get().value);
         $tdImage.appendChild($image);
@@ -51,9 +56,17 @@
         $tr.appendChild($tdYear);
         $tr.appendChild($tdPlate);
         $tr.appendChild($tdColor);
+        $tr.appendChild($tdbtn);
 
         var $fragment = document.createDocumentFragment();
         return $fragment.appendChild($tr);
+      },
+
+      deleteCar: function deleteCar () {
+        var $btnDelete = $('[data-js="btn-delete"]');
+        $btnDelete.on('click', function (e) {
+          $btnDelete.map(arguments)
+        });
       },
 
       companyInfo: function companyInfo () {
