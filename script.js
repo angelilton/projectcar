@@ -7,6 +7,7 @@
         console.log('funfo');
         this.companyInfo();
         this.initEvents();
+        
       },
 
       initEvents: function initEvents () {
@@ -15,11 +16,10 @@
 
       hardleSubmit: function hardleSubmit (e) {
         e.preventDefault();
-        console.log(`submit`)
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild( app.createNewCar() );
         app.clearForm();
-        app.deleteCar()
+        app.deleteCar();
       },
 
       clearForm: function clearForm () {
@@ -39,7 +39,7 @@
         var $image = document.createElement('img');
 
         var $tdbtn = document.createElement('td');
-        $tdbtn.innerHTML = '<button type="submit" data-js="btn-delete">delete</button>';
+        $tdbtn.innerHTML = '<button class="delete" type="submit" data-js="btn-delete">delete</button>';
 
         $tdModel.textContent = $('[data-js="model"]').get().value;
         $tdYear.textContent = $('[data-js="year"]').get().value;
@@ -65,7 +65,11 @@
       deleteCar: function deleteCar () {
         var $btnDelete = $('[data-js="btn-delete"]');
         $btnDelete.on('click', function (e) {
-          $btnDelete.map(arguments)
+          var $button = e.target;
+          console.log($button)
+          var $td = $button.parentNode;
+          var $tr = $td.parentNode;
+          $tr.remove();
         });
       },
 
@@ -84,6 +88,8 @@
         var $companyPhone = $('[data-js="company-phone"]').get();
         $companyName.textContent = data.name;
         $companyPhone.textContent = data.phone;
+        var $header = $('header').get();
+        $header.insertAdjacentHTML('afterbegin', `<img src="${data.img}">` )
       },
 
       isReady: function isReady () {
