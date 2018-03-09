@@ -7,7 +7,6 @@
         console.log('funfo');
         this.companyInfo();
         this.initEvents();
-        
       },
 
       initEvents: function initEvents () {
@@ -16,9 +15,10 @@
 
       hardleSubmit: function hardleSubmit (e) {
         e.preventDefault();
+        app.savenewCar();
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild( app.createNewCar() );
-        app.clearForm();
+        // app.clearForm();
         app.deleteCar();
       },
 
@@ -28,6 +28,23 @@
         $('[data-js="year"]').get().value = '';
         $('[data-js="plate"]').get().value = '';
         $('[data-js="color"]').get().value = '';
+      },
+      savenewCar: function saveNewCar() {
+        var $image = $('[data-js="image"]').get().value;
+        var $model = $('[data-js="model"]').get().value;
+        var $year  = $('[data-js="year"]').get().value;
+        var $plate = $('[data-js="plate"]').get().value;
+        var $color = $('[data-js="color"]').get().value;
+        
+        var ajax = new XMLHttpRequest();
+        ajax.open('POST', 'http://127.0.0.1:3000/car');
+        ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax.send(`image=${$image}&brandModel=${$model}&year=${$year}&plate=${$plate}&color=${$color},`);
+
+        ajax.onreadystatechange = function () {
+          if (ajax.readyState === 4) 
+            alert('carro cadastrado!');
+        }
       },
 
       createNewCar: function createNewCar () {
@@ -45,7 +62,6 @@
         $tdYear.textContent = $('[data-js="year"]').get().value;
         $tdPlate.textContent = $('[data-js="plate"]').get().value;
         $tdColor.textContent = $('[data-js="color"]').get().value;
-       
 
         $image.setAttribute('src', $('[data-js="image"]').get().value);
         $tdImage.appendChild($image);
@@ -63,10 +79,8 @@
       },
 
       deleteCar: function deleteCar () {
-        var $btnDelete = $('[data-js="btn-delete"]');
-        $btnDelete.on('click', function (e) {
+        $('[data-js="btn-delete"]').on('click', function (e) {
           var $button = e.target;
-          console.log($button)
           var $td = $button.parentNode;
           var $tr = $td.parentNode;
           $tr.remove();
