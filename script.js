@@ -7,6 +7,7 @@
         console.log('funfo');
         this.companyInfo();
         this.initEvents();
+        this.getCars();
       },
 
       initEvents: function initEvents () {
@@ -16,10 +17,8 @@
       hardleSubmit: function hardleSubmit (e) {
         e.preventDefault();
         app.savenewCar();
-        var $tableCar = $('[data-js="table-car"]').get();
-        $tableCar.appendChild( app.createNewCar() );
-        // app.clearForm();
-        app.deleteCar();
+        app.getCars();
+        app.clearForm();
       },
 
       clearForm: function clearForm () {
@@ -29,6 +28,7 @@
         $('[data-js="plate"]').get().value = '';
         $('[data-js="color"]').get().value = '';
       },
+      
       savenewCar: function saveNewCar() {
         var $image = $('[data-js="image"]').get().value;
         var $model = $('[data-js="model"]').get().value;
@@ -47,35 +47,50 @@
         }
       },
 
+      getCars: function getCars() {
+        var ajax = new XMLHttpRequest();
+        ajax.open('GET', 'http://127.0.0.1:3000/car');
+        ajax.send();
+        ajax.addEventListener('readystatechange', this.createNewCar, false);
+      },
+
       createNewCar: function createNewCar () {
-        var $tdImage = document.createElement('td');
-        var $tdModel = document.createElement('td');
-        var $tdYear = document.createElement('td');
-        var $tdPlate = document.createElement('td');
-        var $tdColor = document.createElement('td');
-        var $image = document.createElement('img');
+        if (!app.isReady.call(this))
+          return;
+        var data = JSON.parse(this.responseText);
+        data.forEach( function (element) {
+          console.log(element);
+          var $tdImage = document.createElement('td');
+          var $tdModel = document.createElement('td');
+          var $tdYear = document.createElement('td');
+          var $tdPlate = document.createElement('td');
+          var $tdColor = document.createElement('td');
+          var $image = document.createElement('img');
 
-        var $tdbtn = document.createElement('td');
-        $tdbtn.innerHTML = '<button class="delete" type="submit" data-js="btn-delete">delete</button>';
+          var $tdbtn = document.createElement('td');
+          $tdbtn.innerHTML = '<button class="delete" type="submit" data-js="btn-delete">delete</button>';
 
-        $tdModel.textContent = $('[data-js="model"]').get().value;
-        $tdYear.textContent = $('[data-js="year"]').get().value;
-        $tdPlate.textContent = $('[data-js="plate"]').get().value;
-        $tdColor.textContent = $('[data-js="color"]').get().value;
+          $tdModel.textContent = element.brandModel;
+          $tdYear.textContent  = element.year;
+          $tdPlate.textContent = element.plate;
+          $tdColor.textContent = element.color;
 
-        $image.setAttribute('src', $('[data-js="image"]').get().value);
-        $tdImage.appendChild($image);
+          $image.setAttribute('src', element.image);
+          $tdImage.appendChild($image);
 
-        var $tr = document.createElement('tr');
-        $tr.appendChild($tdImage);
-        $tr.appendChild($tdModel);
-        $tr.appendChild($tdYear);
-        $tr.appendChild($tdPlate);
-        $tr.appendChild($tdColor);
-        $tr.appendChild($tdbtn);
+          var $tr = document.createElement('tr');
+          $tr.appendChild($tdImage);
+          $tr.appendChild($tdModel);
+          $tr.appendChild($tdYear);
+          $tr.appendChild($tdPlate);
+          $tr.appendChild($tdColor);
+          $tr.appendChild($tdbtn);
 
-        var $fragment = document.createDocumentFragment();
-        return $fragment.appendChild($tr);
+          var $fragment = document.createDocumentFragment();
+          var $tableCar = $('[data-js="table-car"]').get();
+          $tableCar.appendChild($fragment.appendChild($tr));
+        });
+        app.deleteCar();
       },
 
       deleteCar: function deleteCar () {
