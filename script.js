@@ -17,8 +17,8 @@
       hardleSubmit: function hardleSubmit (e) {
         e.preventDefault();
         app.savenewCar();
-        app.getCars();
         app.clearForm();
+        app.getCars();
       },
 
       clearForm: function clearForm () {
@@ -31,15 +31,15 @@
       
       savenewCar: function saveNewCar() {
         var $image = $('[data-js="image"]').get().value;
-        var $model = $('[data-js="model"]').get().value;
-        var $year  = $('[data-js="year"]').get().value;
-        var $plate = $('[data-js="plate"]').get().value;
-        var $color = $('[data-js="color"]').get().value;
-        
+        var $model = $('[data-js="model"]').get().value.toUpperCase();
+        var $year  = $('[data-js="year"]').get().value.toUpperCase();
+        var $plate = $('[data-js="plate"]').get().value.toUpperCase();
+        var $color = $('[data-js="color"]').get().value.toUpperCase();
+
         var ajax = new XMLHttpRequest();
         ajax.open('POST', 'http://127.0.0.1:3000/car');
         ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        ajax.send(`image=${$image}&brandModel=${$model}&year=${$year}&plate=${$plate}&color=${$color},`);
+        ajax.send(`image=${$image}&brandModel=${$model}&year=${$year}&plate=${$plate}&color=${$color}`);
 
         ajax.onreadystatechange = function () {
           if (ajax.readyState === 4) 
@@ -55,11 +55,13 @@
       },
 
       createNewCar: function createNewCar () {
+        
+        app.clearTable();
+
         if (!app.isReady.call(this))
           return;
         var data = JSON.parse(this.responseText);
         data.forEach( function (element) {
-          console.log(element);
           var $tdImage = document.createElement('td');
           var $tdModel = document.createElement('td');
           var $tdYear = document.createElement('td');
@@ -123,6 +125,11 @@
 
       isReady: function isReady () {
         return this.readyState === 4 && this.status === 200;
+      },
+
+      clearTable: function clearTable () {
+        var $tableCar = $('[data-js="table-car"]').get();
+        $tableCar.innerHTML = '';
       }
 
     };
