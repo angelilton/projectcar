@@ -98,8 +98,9 @@
       deleteCar: function deleteCar () {
         $('[data-js="btn-delete"]').on('click', function (e) {
           var $button = e.target;
-          var $td = $button.parentNode;
+          var $td = $button.parenode;
           var $tr = $td.parentNode;
+          console.log($tr)
           $tr.remove();
         });
       },

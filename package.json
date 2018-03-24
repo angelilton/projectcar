@@ -1,0 +1,26 @@
+{
+  "name": "projectcar",
+  "version": "1.0.0",
+  "description": "projeto do curso de curso javascript ninja criação de webapp de cadastro de carros apenas para praticar",
+  "main": "dom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelilton/projectcar.git"
+  },
+  "author": "angelilton epifanio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelilton/projectcar/issues"
+  },
+  "homepage": "https://github.com/angelilton/projectcar#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "^2.7.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
