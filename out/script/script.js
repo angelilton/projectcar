@@ -18,7 +18,6 @@
         e.preventDefault();
         app.savenewCar();
         app.clearForm();
-        app.getCars();
       },
 
       clearForm: function clearForm () {
@@ -43,7 +42,7 @@
 
         ajax.onreadystatechange = function () {
           if (ajax.readyState === 4) 
-            alert('carro cadastrado!');
+            app.getCars();
         }
       },
 
@@ -68,6 +67,8 @@
           var $tdPlate = document.createElement('td');
           var $tdColor = document.createElement('td');
           var $image = document.createElement('img');
+
+          $tdPlate.setAttribute("class", "tdPlate")
 
           var $tdbtn = document.createElement('td');
           $tdbtn.innerHTML = '<button class="delete" type="submit" data-js="btn-delete">delete</button>';
@@ -100,8 +101,18 @@
           var $button = e.target;
           var $td = $button.parentNode;
           var $tr = $td.parentNode;
-          console.log($tr)
+          var $trPlaceValue = $tr.childNodes[3].textContent;
           $tr.remove();
+
+          var ajax = new XMLHttpRequest();
+          ajax.open('DELETE', 'http://127.0.0.1:3000/car');
+          ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          ajax.send(`plate=${$trPlaceValue}`);
+
+          ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4)
+              app.getCars();
+          }
         });
       },
 
