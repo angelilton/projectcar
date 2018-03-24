@@ -1,8 +1,32 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.menu {
+  float: left;
+  width: 30%;
+  height: 900px;
+  background: #45b29d;
+}
+.tabela {
+  float: left;
+  width: 68%;
+  margin: 10px;
 }
 header {
   text-align: center;
+  margin-top: 10%;
+  margin-bottom: 35px;
+}
+header h2,
+header p {
+  color: #fff;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 ul {
   list-style: none;
@@ -10,28 +34,20 @@ ul {
 li {
   margin-bottom: 10px;
 }
-label {
-  display: block;
-}
 img {
   max-width: 220px;
   height: auto;
+}
+label {
+  display: block;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 4px;
 }
 input {
   padding: 5px;
   width: 270px;
   text-transform: uppercase;
-}
-form {
-  float: left;
-  width: 35%;
-}
-table {
-  float: left;
-  width: 60%;
-}
-table {
-  border-collapse: collapse;
 }
 td,
 th {
@@ -39,13 +55,23 @@ th {
   border: 1px solid #ccc;
 }
 button {
-  background: #008000;
+  float: right;
   border: 0;
   color: #fff;
   padding: 10px 20px;
   text-transform: uppercase;
 }
-.delete {
+button.delete {
   background: #e72a1c;
   padding: 5px;
+}
+button.submit {
+  margin: 10px 18%;
+  cursor: pointer;
+  font-size: 16px;
+  background: #555;
+  border: 2px solid #fff;
+}
+button.submit:hover {
+  background: #8cc84b;
 }

@@ -7,55 +7,57 @@
   <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
   <link rel="stylesheet" href="./css/stylus.css">
-  <title>JS Garage Car</title>
+  <title>JS Garage Cars</title>
 </head>
 <body>
-  <header>
-    <h2>
-      <span data-js="company-name">-</span>
-      <span data-js="company-phone"></span>
-    </h2>
-  </header>
-  <form action="/" data-js="form-register">
-    <ul>
-      <li>
-        <label>Image of Car:</label>
-        <input type="url" data-js="image" placeholder="image for car">
-      </li>
-      <li>
-        <label>Model</label>
-        <input type="text" data-js="model">
-      </li>
-      <li>
-        <label>Year:</label>
-        <input type="text" pattern="[0-9]+$" data-js="year" maxlength="4">  
-      </li>
-      <li>
-        <label>Plate:</label>
-        <input type="text" data-js="plate">
-      </li>
-      <li>
-        <label>Color:</label>
-        <input type="text" data-js="color">
-      </li>
-      <li>
-        <button type="submit">Cadastrar</button>
-      </li>
-    </ul>
-  </form>
-  <table>
-    <thead>
-      <tr>
-        <th>Image car</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Plate</th>
-        <th>Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody data-js="table-car"></tbody>
-  </table>
+  <section class="menu">
+    <header>
+      <h2 data-js="company-name"></h2>
+      <p data-js="company-phone"></p>
+    </header>
+    <form action="/" data-js="form-register">
+      <ul>
+        <li>
+          <label>Image of Car:</label>
+          <input type="url" data-js="image" placeholder="insert URL of a image" required>
+        </li>
+        <li>
+          <label>Model:</label>
+          <input type="text" data-js="model" required>
+        </li>
+        <li>
+          <label>Year:</label>
+          <input type="text" pattern="[0-9]+$" data-js="year" maxlength="4" required>
+        </li>
+        <li>
+          <label>Plate:</label>
+          <input type="text" data-js="plate" required>
+        </li>
+        <li>
+          <label>Color:</label>
+          <input type="text" data-js="color" required>
+        </li>
+        <li>
+          <button type="submit" class="submit">Cadastrar</button>
+        </li>
+      </ul>
+    </form>
+  </section>
+  <section class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Image car</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>Plate</th>
+          <th>Color</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody data-js="table-car"></tbody>
+    </table>
+  </section>
   <script src="./script/dom.js"></script>
   <script src="./script/script.js"></script>
 </body>
