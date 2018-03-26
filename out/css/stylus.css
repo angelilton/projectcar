@@ -7,13 +7,16 @@ body {
 .menu {
   float: left;
   width: 30%;
-  height: 900px;
+  height: 100vh;
   background: #45b29d;
 }
 .tabela {
   float: left;
   width: 68%;
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100vh;
+  overflow: auto;
 }
 header {
   text-align: center;
@@ -27,6 +30,7 @@ header p {
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 ul {
   list-style: none;
@@ -35,7 +39,7 @@ li {
   margin-bottom: 10px;
 }
 img {
-  max-width: 220px;
+  max-width: 170px;
   height: auto;
 }
 label {
