@@ -19,19 +19,19 @@
       <ul>
         <li>
           <label>Image of Car:</label>
-          <input type="url" data-js="image" placeholder="insert URL of a image" required>
+          <input type="url" data-js="image" placeholder="insert URL of a image" pattern="https?://.+">
         </li>
         <li>
           <label>Model:</label>
-          <input type="text" data-js="model" required>
+          <input type="text" data-js="model" autofocus required>
         </li>
         <li>
           <label>Year:</label>
-          <input type="text" pattern="[0-9]+$" data-js="year" maxlength="4" required>
+          <input type="text" data-js="year" pattern="\d{4}" maxlength="4" title="digite apenas numeros" required>
         </li>
         <li>
           <label>Plate:</label>
-          <input type="text" data-js="plate" required>
+          <input type="text" data-js="plate" pattern="^[a-z]{3}-\d{4}$" maxlength="8" title="digite a placa corretamente ABC-1234" required>
         </li>
         <li>
           <label>Color:</label>
